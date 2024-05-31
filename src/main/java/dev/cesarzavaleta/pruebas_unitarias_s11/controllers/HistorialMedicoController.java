@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping; // Importación de la
 import org.springframework.web.bind.annotation.PathVariable; // Importación de la anotación @PathVariable para extraer variables de la URL
 import org.springframework.web.bind.annotation.RequestMapping; // Importación de la anotación @RequestMapping para mapear solicitudes HTTP a nivel de clase
 import org.springframework.web.bind.annotation.RestController; // Importación de la anotación @RestController para definir un controlador REST
+import org.springframework.web.bind.annotation.PostMapping; // Importación de la anotación @PostMapping para mapear solicitudes HTTP POST
+import org.springframework.web.bind.annotation.RequestBody; // Importación de la anotación @RequestBody para extraer el cuerpo de la solicitud
 
 import java.util.List; // Importación de la clase List para manejar listas de historiales médicos
 
@@ -31,5 +33,11 @@ public class HistorialMedicoController {
     @GetMapping("/{id}")
     public HistorialMedico getHistorialMedicoById(@PathVariable Long id) {
         return historialMedicoService.finById(id);
+    }
+
+    // Mapea solicitudes HTTP POST a '/historialMedico' para crear un nuevo historial médico
+    @PostMapping
+    public HistorialMedico createHistorialMedico(@RequestBody HistorialMedico historialMedico) {
+        return historialMedicoService.save(historialMedico); // Llama al método del servicio para guardar el nuevo historial médico
     }
 }
